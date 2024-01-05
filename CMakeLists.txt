@@ -4,6 +4,8 @@ cmake_minimum_required(VERSION 3.12)
 set(PICO_BOARD "pico_w")
 # Set sdk path
 set(PICO_SDK_PATH "/Users/vincentho/pico/pico-sdk")
+# Set FreeRTOS Kernel path
+set(FREERTOS_KERNEL_PATH ${CMAKE_CURRENT_SOURCE_DIR}/extern/FreeRTOS-Kernel)
 # Set Wifi credentials
 set(WIFI_SSID "pico_4yp")
 set(WIFI_PASSWORD "pwd")
@@ -26,7 +28,7 @@ endif()
 # Initialize the SDK
 pico_sdk_init()
 
-# Add extern lib
+# Add extern lib, exclude freertos as it is done within the freertos dir cmake
 add_subdirectory(extern)
 
 # Add docs generation through doxygen
@@ -43,6 +45,8 @@ add_subdirectory(blink)
 add_subdirectory(hello_world_usb)
 # Add etl_test example
 add_subdirectory(etl_test)
+# Add freertos examples
+add_subdirectory(freertos)
 
 if (CMAKE_C_COMPILER_ID STREQUAL "GNU")
     add_compile_options(-Wno-maybe-uninitialized)
