@@ -27,7 +27,6 @@
 #include <stdio.h>
 #include <iostream>
 
-static QueueHandle_t xQueue = NULL;
 static SemaphoreHandle_t semPtr = NULL;
 
 static void led_task(void*)

@@ -1,5 +1,5 @@
 /**
- * @file usb_device_hid_composite_freertos_no_lwip.c
+ * @file usb_device_hid_composite_no_lwip.c
  * @author Vincent Ho (mch79@cam.ac.uk)
  * @brief 
  * @version 0.1
@@ -42,13 +42,13 @@
 
 // 128*4 = 512 bytes
 // (recommended min stack size for each task)
-#define STACK_SIZE 128
+#define STACK_SIZE         128
 
 // Increase stack size when debug log is enabled
 #define USBD_STACK_SIZE    (3*configMINIMAL_STACK_SIZE/2) * (CFG_TUSB_DEBUG ? 2 : 1)
 
 // Stack size for the HID task
-#define HID_STACK_SIZE      configMINIMAL_STACK_SIZE
+#define HID_STACK_SIZE     configMINIMAL_STACK_SIZE
 
 //--------------------------------------------------------------------+
 // MACRO CONSTANT TYPEDEF PROTOTYPES
@@ -85,10 +85,10 @@ int main()
     // An extra define '#define configNUM_CORES configNUMBER_OF_CORES' in FreeRTOSConfig.h
     // is also required for pico-sdk compatability issues.
     if (cyw43_arch_init()) {
-        printf("Wi-Fi init failed");
+        printf("Wi-Fi init failed.\n");
     }else
     {
-        printf("Wi-F init!\n");
+        printf("Wi-F init suceeded.\n");
     }
     // Start with LED ON
     cyw43_arch_gpio_put(CYW43_WL_GPIO_LED_PIN, 1);
