@@ -1,0 +1,41 @@
+syntax = "proto2";
+
+import 'nanopb.proto';
+
+message MsgType1 {
+    repeated int32 value = 1;
+}
+
+message MsgType2 {
+    repeated int32 value = 1;
+    required bool led_on = 2;
+}
+message MsgType3 {
+    required int32 value1 = 1;
+    required int32 value2 = 2;
+    required int32 value3 = 3;
+    required int32 value4 = 4;
+    required int32 value5 = 5;
+    required int32 value6 = 6;
+    required int32 value7 = 7;
+    required string str1  = 8;
+    required string str2  = 9;
+    required string str3  = 10;
+    required string str4  = 11;
+    required string str5  = 12;
+    required string str6  = 13;
+    required string str7  = 14;
+    required string str8  = 15;
+}
+
+message OneOfMessage
+{
+    option (nanopb_msgopt).submsg_callback = true;
+    required int32 lucky_number = 1;
+    required string str = 2;
+    oneof payload {
+        MsgType1 msg1 = 3;
+        MsgType2 msg2 = 4;
+        MsgType3 msg3 = 5;
+    }
+}

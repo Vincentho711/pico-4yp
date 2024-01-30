@@ -6,6 +6,8 @@ set(PICO_BOARD "pico_w")
 set(PICO_SDK_PATH "/Users/vincentho/pico/pico-sdk")
 # Set FreeRTOS Kernel path
 set(FREERTOS_KERNEL_PATH ${CMAKE_CURRENT_SOURCE_DIR}/extern/FreeRTOS-Kernel)
+# Set nanopb path
+set(NANOPB_SRC_ROOT_FOLDER ${CMAKE_CURRENT_SOURCE_DIR}/extern/nanopb)
 # Set Wifi credentials
 set(WIFI_SSID "pico_4yp")
 set(WIFI_PASSWORD "pwd")

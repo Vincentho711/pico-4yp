@@ -4,3 +4,6 @@
 [submodule "extern/FreeRTOS-Kernel"]
 	path = extern/FreeRTOS-Kernel
 	url = https://github.com/FreeRTOS/FreeRTOS-Kernel.git
+[submodule "extern/nanopb"]
+	path = extern/nanopb
+	url = https://github.com/nanopb/nanopb.git

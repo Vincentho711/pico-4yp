@@ -7,3 +7,4 @@ build
 *.pdf
 **/html
 **/latex
+__pycache__/
