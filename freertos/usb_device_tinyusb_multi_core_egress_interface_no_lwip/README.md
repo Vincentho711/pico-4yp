@@ -44,7 +44,7 @@ cmake ..
 ```
 Navigate into this project by
 ```
-cd freertos/usb_device_tinyusb_egress_interface_no_lwip/
+cd freertos/usb_device_tinyusb_multi_core_egress_interface_no_lwip/
 ```
 and run
 ```
@@ -52,7 +52,7 @@ make -j4
 ```
 This will create the `elf` file which can be uploaded onto the Raspberry Pico W. To flash this file onto it directly with openocd, 
 ```
-sudo openocd -f interface/cmsis-dap.cfg -f target/rp2040.cfg -c "adapter speed 5000" -c "program freertos_usb_device_tinyusb_egress_interface_no_lwip.elf verify reset exit"
+sudo openocd -f interface/cmsis-dap.cfg -f target/rp2040.cfg -c "adapter speed 5000" -c "program freertos_usb_device_tinyusb_multi_core_egress_interface_no_lwip.elf verify reset exit"
 ```
 Once it is uploaded successfully, we reset and should be able to see a TinyUSB device appearing with
 ```
