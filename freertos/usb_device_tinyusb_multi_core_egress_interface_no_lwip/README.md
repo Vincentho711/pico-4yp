@@ -38,8 +38,8 @@ To systematically evaluate the system and identify potential bottlenecks, a seri
 ### Nanopb features
 #### Encode
 - [x] Encode
-- [ ] Encode strings
-- [ ] Encode OneOf messages
+- [x] Encode strings
+- [x] Encode OneOf messages
 
 #### Decode
 - [ ] Decode
@@ -76,7 +76,7 @@ ioreg -p IOUSB
 ```
 
 ### Executing host program
-The host will be communicating with the USB CDC device through a Python script located in `python_host_script/tinyusb_multi_core_egress_interface.py`. A serial connection is established and data is sent from the device to host. Don't forget to change the `port_name` in the Python script before executing it. It doesn't matter what the `baud_rate` is as USB will attempt to send/receive data as quick as possible. The script just outputs all the data received from the device without decoding, so streams of bytes will be displayed. The script will maintain the serial connection once the data has been transferred, users will have to exit the script manually through <kbd>Ctrl</kbd> + <kbd>c</kbd>. 
+The host will be communicating with the USB CDC device through a Python script located in `python_host_scripts/tinyusb_multi_core_egress_interface.py`. A serial connection is established and data is sent from the device to host. Don't forget to change the `port_name` in the Python script before executing it. It doesn't matter what the `baud_rate` is as USB will attempt to send/receive data as quick as possible. The script just outputs all the data received from the device without decoding, so streams of bytes will be displayed. The script will maintain the serial connection once the data has been transferred, users will have to exit the script manually through <kbd>Ctrl</kbd> + <kbd>c</kbd>. 
 
 ## Investigation Results
 

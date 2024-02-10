@@ -5,16 +5,17 @@ import egress_multi_core_pb2
 port_name = '/dev/cu.usbmodem1301'
 baud_rate = 115200
 
-msg_received = 0;
+msg_received = 0
 if __name__ == "__main__":
     try:
         ser = serial.Serial(port=port_name, baudrate=baud_rate, dsrdtr=True)
         if ser.is_open:
             print(f"Connected to USB device '{port_name}'.")
             while True:
-                # Read all
+                # Read line if it is available
                 print(ser.readline())
-                # print(ser.readall())
+
+                # Decode the incoming data 
                 # Read the first byte which indicates the length of the msg
                 # msg_length = int.from_bytes(bytes=ser.read(size=1));
                 # msg_content = ser.read(size=msg_length)
