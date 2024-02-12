@@ -1,10 +1,43 @@
 # Host to Raspberry Pi Pico W Command Interface with FreeRTOS, TinyUSB and nanopb
 
-This C project showcases a robust serial communication system with USB between a host (such as a laptop running a pyserial script) and a Raspberry Pi Pico W, configured as a USB CDC (Communication Device Class) device. The Pico W is running FreeRTOS using TinyUSB as the usb stack and nanopb to decode and parse commands from the host.
+This C project showcases a robust serial communication system with USB between a host (such as a laptop running a pyserial script) and a Raspberry Pi Pico W, configured as a USB CDC (Communication Device Class) device. The Pico W is running FreeRTOS using TinyUSB as the usb stack and nanopb to decode and parse commands from the host. This project also demonstrates the use of Python as a host interface to encode commands sent to the Pico W.
 
 ## Description
 
-To allow host to interface with the Raspberry Pi Pico W via USB, commands are encoded/decoded using protobuf. Since protobuf is a streaming protocol, a custom delimiter (prepending each message with its message length) is used to extract each individual message before decoding using decode callbacks. This example also illustrates using decode callbacks in the context of `oneof` protobuf messages, which greatly enhances the flexibility of messages. The format of the mesesages exchanged is defined in `proto/unionproto.proto`. If you would like to modify the format, you can modify the `unionproto.proto` file, the cmake build system will then generate the necessary files in both C (for the device) and Python (for the host) to run this example.
+To allow the host to interface with the Raspberry Pi Pico W via USB, commands are encoded/decoded using protobuf. Since protobuf is a streaming protocol, a custom delimiter (prepending each message with its message length) is used to extract each individual message before decoding using decode callbacks. This example also illustrates using decode callbacks in the context of `oneof` protobuf messages, which greatly enhances the flexibility of messages. The format of the mesesages exchanged is defined in `proto/unionproto.proto`. If you would like to modify the format, you can modify the `unionproto.proto` file, the cmake build system will then generate the necessary files in both C (for the device) and Python (for the host) to run this example. The configuration of this example is illustrated in the figure below.
+
+![usb_nanopb_command_interface_no_lwip_structure](./figures/usb_nanopb_command_interface_no_lwip.png)
+
+## Technology utilised
+### Hardware features
+- [ ] Hardware timer interrupts
+
+### Libraries
+- [x] pico-sdk
+- [x] FreeRTOS
+- [ ] lwIP
+- [x] TinyUSB
+- [x] nanopb
+
+### FreeRTOS features
+- [x] Software timers
+- [ ] Queues
+- [ ] Semaphore/Mutexes
+- [ ] Task notifications
+- [x] Message buffers
+- [ ] Stream buffers
+- [ ] SMP
+
+### Nanopb features
+#### Encode
+- [ ] Encode
+- [ ] Encode strings
+- [ ] Encode OneOf messages
+
+#### Decode
+- [x] Decode
+- [x] Decode strings
+- [x] Decode OneOf messages
 
 ## Getting Started
 

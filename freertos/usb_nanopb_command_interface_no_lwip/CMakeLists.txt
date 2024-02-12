@@ -6,15 +6,15 @@ find_package(Nanopb REQUIRED)
 nanopb_generate_cpp(PROTO_SRCS PROTO_HDRS RELPATH proto proto/unionproto.proto)
 
 # Generate the nanopb classes for using Python as host
-set(PROTO_PY ${CMAKE_CURRENT_LIST_DIR}/proto/unionprot_pb2.py)
+set(UNION_PROTO_PY ${CMAKE_CURRENT_LIST_DIR}/proto/unionproto_pb2.py)
 add_custom_command(
-        OUTPUT ${PROTO_PY}
+        OUTPUT ${UNION_PROTO_PY}
         COMMAND protoc -I=${CMAKE_CURRENT_LIST_DIR}/proto 
         --python_out=${CMAKE_CURRENT_LIST_DIR}/python_host_scripts 
         ${CMAKE_CURRENT_LIST_DIR}/proto/unionproto.proto
         )
 # Invoke custom command for generating nanopb python files
-add_custom_target(proto_py ALL DEPENDS ${PROTO_PY})       
+add_custom_target(union_proto_py ALL DEPENDS ${UNION_PROTO_PY})
 
 add_executable(freertos_usb_nanopb_command_interface_no_lwip
         ${PROTO_SRCS}                     # Include the generated nanopb source files
