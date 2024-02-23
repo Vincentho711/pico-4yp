@@ -8,3 +8,4 @@ build
 **/html
 **/latex
 __pycache__/
+.cache/

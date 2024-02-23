@@ -33,6 +33,9 @@ pico_sdk_init()
 # Add extern lib, exclude freertos as it is done within the freertos dir cmake
 add_subdirectory(extern)
 
+# Add middleware, including SEGGER RTT
+add_subdirectory(middleware)
+
 # Add docs generation through doxygen
 add_subdirectory(docs)
 
