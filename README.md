@@ -4,7 +4,7 @@ A data acquisition system based on the RP2040 platform for collecting data from 
 
 ## Description
 
-An in-depth paragraph about your project and overview of use.
+Currently, it is in development and there is a list of examples in `examples`. Each example tests a specific feature which could be used for reference in the future during final firmware implementation.
 
 ## Getting Started
 

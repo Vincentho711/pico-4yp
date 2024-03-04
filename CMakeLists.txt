@@ -44,14 +44,8 @@ add_compile_options(-Wall
         -Wno-unused-function # we have some for the docs that aren't called
         )
         
-# Add blink example
-add_subdirectory(blink)
-# Add hello world usb example
-add_subdirectory(hello_world_usb)
-# Add etl_test example
-add_subdirectory(etl_test)
-# Add freertos examples
-add_subdirectory(freertos)
+# Add the examples directory
+add_subdirectory(examples)
 
 if (CMAKE_C_COMPILER_ID STREQUAL "GNU")
     add_compile_options(-Wno-maybe-uninitialized)

@@ -58,11 +58,9 @@
 #define configUSE_APPLICATION_TASK_TAG          0
 #define configUSE_COUNTING_SEMAPHORES           1
 #define configQUEUE_REGISTRY_SIZE               8
-#define configUSE_QUEUE_SETS                    1
+#define configUSE_QUEUE_SETS                    0
 #define configUSE_TIME_SLICING                  1
 #define configUSE_NEWLIB_REENTRANT              0
-#define configUSE_TASK_NOTIFICATIONS            1 // Enable task notification
-#define configTASK_NOTIFICATION_ARRAY_ENTRIES   1 // Set the number of indexes in task array   
 // todo need this for lwip FreeRTOS sys_arch to compile
 #define configENABLE_BACKWARD_COMPATIBILITY     1
 #define configNUM_THREAD_LOCAL_STORAGE_POINTERS 5
@@ -106,10 +104,10 @@
 
 #if FREE_RTOS_KERNEL_SMP // set by the RP2040 SMP port of FreeRTOS
 /* SMP port only */
-#define configNUMBER_OF_CORES                   2  // 2 for multicore
+#define configNUMBER_OF_CORES                   2 // 2 for multicore
 #define configTICK_CORE                         0
 #define configRUN_MULTIPLE_PRIORITIES           1
-#define configUSE_CORE_AFFINITY                 1  // 1 for multicore
+#define configUSE_CORE_AFFINITY                 1 // 1 for multicore
 #endif
 
 /* RP2040 specific */

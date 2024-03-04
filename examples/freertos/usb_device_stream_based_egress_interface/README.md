@@ -7,17 +7,17 @@ With the introduction of the Python CLI host interface (accessible via the entry
 
 Once the user establishes a connection to the device and configures a periodic sampler using the CLI, the host transitions into streaming mode to receive data streamed from the device.
 
-On the device, a recurring timer on core 1 is initiated. Upon timer expiration, a callback is triggered, generating data that is then placed into a FreeRTOS message buffer. A task on core 0 retrieves data from this buffer and promptly relays it back to the host via the TinyUSB CDC stack. Throughout this streaming operation, the device actively monitors user commands, allowing interruptions to the operation and a switch back to message mode when needed.
+On the device, a recurring timer on core 1 is initiated. Upon timer expiration, a callback is triggered, generating data that is then placed into a FreeRTOS stream buffer. A task on core 1 retrieves data from this stream buffer and promptly relays it back to the host via the TinyUSB CDC stack. Throughout this streaming operation, the device actively monitors user commands, allowing interruptions to the operation and a switch back to message mode when needed.
 
 The following diagram shows the interaction between host, core 0 and core 1.
 
-![tinyusb_stream_based_egress_interface_test_setup](./figures/tinyusb_stream_based_egress_interface_v1.jpg)
+![tinyusb_stream_based_egress_interface_test_setup](./figures/tinyusb_stream_based_egress_interface_v2.jpg)
 
-Core 0 on the RP2040 is responsible for communication with the host, and fetching nanopb messages from a FreeRTOS message buffer when messages are available to be sent across to the host. On the other hand, a repeating timer is set up on Core 1, it is responsible for generating data and put them into the FreeRTOS message buffer when the timer expires. The period of the timer can be changed dynamically using the python host interface (see `python_host_script/README.md` for commands to communicate with the device).
+Core 0 on the RP2040 is responsible for communication with the host, and fetching nanopb messages from a FreeRTOS message buffer when messages are available to be sent across to the host. On the other hand, a repeating timer is set up on Core 1, it is responsible for generating data and put them into the FreeRTOS stream buffer when the timer expires. The period of the timer can be changed dynamically using the python host interface (see `python_host_script/README.md` for commands to communicate with the device). The upper limit of the sampling frequency is 25kHz (equivalent to a minimum sampling period of 40 micro-seconds) with the TinyUSB + FreeRTOS architecture.
 
 To facilitate testing, the device C code incorporates built-in assertions to guarantee the absence of dropped bytes. In cases where byte drops occur due to system inefficiencies—particularly evident when employing a short sampling period for the periodic sampler—the device triggers assertion failures and initiates an automatic shutdown. To restart, users must unplug and replug the power cable into the Pico W.
 
-During testing, it became evident that for sampling periods smaller than 500 microseconds, the current architecture results in assertion failures, highlighting the need for optimisation in subsequent iterations.
+During testing, it became evident that for sampling periods smaller than 40 micro-seconds, the current architecture results in assertion failures, highlighting the need for optimisation in subsequent iterations.
 
 ## Technology utilised
 ### Device
@@ -36,8 +36,8 @@ During testing, it became evident that for sampling periods smaller than 500 mic
 - [ ] Queues
 - [ ] Semaphore/Mutexes
 - [x] Task notifications
-- [x] Message buffers
-- [ ] Stream buffers
+- [ ] Message buffers
+- [x] Stream buffers
 - [x] SMP
 
 #### Debugging

@@ -19,6 +19,7 @@ target_link_libraries(freertos_usb_device_cdc_dual_ports_no_lwip
         tinyusb_device_freertos                 # For using freertos version of tinyusb
         tinyusb_board_freertos                  # For using freertos version of tinyusb
         FreeRTOS-Kernel-Heap4                   # Use heap_4.c for FreeRTOS memory management
+        # freertos_systemview                     # For systemview functionality
         )
 
 # If using the picoprobe, use it to relay stdio messages via uart, so enable uart and disable usb

@@ -2,7 +2,7 @@ import serial
 import time
 import unionproto_pb2
 
-port_name = '/dev/cu.usbmodem1201'
+port_name = '/dev/cu.usbmodem1301'
 baud_rate = 115200
 
 def prepare_msg_1() -> unionproto_pb2.OneOfMessage:
