@@ -36,6 +36,9 @@ add_subdirectory(extern)
 # Add middleware, including SEGGER RTT
 add_subdirectory(middleware)
 
+# Add the sensor drivers
+add_subdirectory(sensor_drivers)
+
 # Add docs generation through doxygen
 add_subdirectory(docs)
 
@@ -46,6 +49,10 @@ add_compile_options(-Wall
         
 # Add the examples directory
 add_subdirectory(examples)
+
+# Add the device_src directory
+add_subdirectory(device_src)
+
 
 if (CMAKE_C_COMPILER_ID STREQUAL "GNU")
     add_compile_options(-Wno-maybe-uninitialized)

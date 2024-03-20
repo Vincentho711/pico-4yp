@@ -1,4 +1,5 @@
 add_subdirectory(blink)
 add_subdirectory(etl_test)
 add_subdirectory(hello_world_usb)
+add_subdirectory(adc_dma)
 add_subdirectory(freertos)
