@@ -5,10 +5,6 @@
 #include <hardware/gpio.h>
 #include <hardware/spi.h>
 
-
-/**
- * @brief Initialise the AD7606B ADC
- */
 void ad7606b_init(void)
 {
   // Set SCLK frequency
@@ -33,9 +29,6 @@ void ad7606b_init(void)
   gpio_put(ADC_RESET_PIN, 0);
 }
 
-/**
- * @brief Reset the AD7606B ADC
- */
 void ad7606b_reset(void)
 {
   gpio_put(ADC_RESET_PIN, 1);
@@ -44,9 +37,6 @@ void ad7606b_reset(void)
   sleep_us(0);
 }
 
-/**
- * @brief Start conversion on ADC, a conversion takes 4 micro-seconds with oversampling ratio of 4
- */
 void ad7606b_convert(void)
 {
   gpio_put(ADC_CONVST_PIN, 1);
@@ -65,12 +55,20 @@ void ad7606b_convert(void)
   __asm volatile ("nop\n");
 }
 
-void ad7606b_sample(uint16_t dest_buf[8])
+void ad7606b_sample(int32_t* dest_buf, uint8_t* elementsTransferred, uint8_t active_adc_chan)
 {
+  uint16_t adc_data [8];
   ad7606b_convert();
   // Wait if the ADC is busy
   while (gpio_get(ADC_BUSY_PIN));
-  // Read 16 bytes in a blocking manner
-  // Only sample first 8 bytes which contains data bytes for ADC channel 1 & 2
-  spi_read16_blocking(ADC_SPI_CHANNEL, 0, dest_buf, 8);
+  // Read 8 16-bits in a blocking manner, this reads all 8 channels even though
+  // some channels are not active
+  spi_read16_blocking(ADC_SPI_CHANNEL, 0, adc_data, 8);
+
+  // Convert uint16_t to store in int32_t destination buffer, only convert active adc channels
+  for (int i=0; i<active_adc_chan; i++)
+  {
+    dest_buf[*elementsTransferred] = (int32_t) adc_data[i];
+    (*elementsTransferred)++;
+  }
 }

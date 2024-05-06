@@ -12,6 +12,10 @@ else()
     endif()
 
     add_executable(device_main)
+
+    # Add the lib directory to build internal libraries
+    add_subdirectory(${CMAKE_CURRENT_LIST_DIR}/lib)
+
     target_sources(device_main PUBLIC
         ${CMAKE_CURRENT_LIST_DIR}/main.c
         # ${CMAKE_CURRENT_LIST_DIR}/usb_descriptors.c
@@ -32,8 +36,7 @@ else()
         tinyusb_board_freertos                  # For using freertos version of tinyusb
         FreeRTOS-Kernel-Heap4                   # Use heap_4.c for FreeRTOS memory management
         segger_rtt                              # Use SEGGER RTT for fast debugging
-        sensor_drivers                          # A library which contains all individual sensor drivers
-        hardware_spi
+        sensor_manager                          # A library which contains the sensor manager and all sensor drivers
         )
 
     # Disable both stdio output with usb and uart

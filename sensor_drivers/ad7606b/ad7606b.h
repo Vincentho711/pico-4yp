@@ -9,10 +9,29 @@
 
 
 // Function prototypes
+/**
+ * @brief Initialise the AD7606B ADC
+ */
 void ad7606b_init(void);
+
+/**
+ * @brief Reset the AD7606B ADC
+ */
 void ad7606b_reset(void);
+
+/**
+ * @brief Start conversion on ADC, a conversion takes 4 micro-seconds with oversampling ratio of 4
+ */
 void ad7606b_convert(void);
-void ad7606b_sample(uint16_t dest_buf[8]);
+
+/**
+ * @brief Sample from the ADC, which includes the conversion and read out
+ *
+ * @param dest_buf The pointer to the starting address of the destination buffer
+ * @param elementsTransferred The number of existing elements in the destination buffer, the correct starting address to populate from will be calculated
+ * @param active_adc_chan The number of active adc channels
+ */
+void ad7606b_sample(int32_t* dest_buf, uint8_t* elementsTransferred, uint8_t active_adc_chan);
 
 
 #endif /* AD7606B_h */

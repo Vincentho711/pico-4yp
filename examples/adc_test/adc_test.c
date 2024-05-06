@@ -1,6 +1,6 @@
 /**
- * @file adc_dma.c
- * @brief A test to enable dma for the ad7606b adc
+ * @file adc_test.c
+ * @brief A test to sample from the AD7606b
  */
 
 
@@ -29,20 +29,24 @@ int main()
   ad7606b_init();
   ad7606b_reset();
 
-  int16_t adc_data[8] = {0};
+  int32_t dest_buf[16] = {0};
+  uint8_t bytesTransferred = 0;
+  uint8_t active_adc_chan = 2;
 
   while (true)
   {
     led_on = !led_on;
     // Blink the onboard LED
     cyw43_arch_gpio_put(CYW43_WL_GPIO_LED_PIN, led_on);
+    // Reset the bytesTransferred
+    bytesTransferred = 0;
     // Sample from the ADC, blocking
-    ad7606b_sample((uint16_t*)adc_data);
+    ad7606b_sample(dest_buf, &bytesTransferred, active_adc_chan);
 
     SEGGER_RTT_printf(0,"Time = %" PRIu64 "\n", get_absolute_time());
-    for (int i = 0; i < 8; i++)
+    for (int i = 0; i < 16; i++)
     {
-      SEGGER_RTT_printf(0, "%d = %d\n", i, adc_data[i]);
+      SEGGER_RTT_printf(0, "%d = %d\n", i, dest_buf[i]);
     }
     SEGGER_RTT_printf(0, "\n");
     sleep_ms(1000);
