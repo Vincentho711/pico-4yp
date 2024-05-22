@@ -10,6 +10,13 @@
 #include "sensor_manager.h"
 #include "pico/time.h"
 #include <SEGGER_RTT.h>
+#include "FreeRTOS.h"
+#include "task.h"
+#include "tusb.h"
+#include <pb_encode.h>
+#include <pb_decode.h>
+#include <pb_common.h>
+#include <main.pb.h>
 
 bool led_on = 0;
 uint8_t num_of_adc_chan = 0;
@@ -30,6 +37,9 @@ int main()
   }
   ad7606b_init();
   ad7606b_reset();
+
+  // Initialise TinyUSB stack
+  tusb_init();
 
   // Destination buffer used to store sensor values obtained
   int32_t dest_buf[16] = {0};
@@ -61,6 +71,9 @@ int main()
     num_of_adc_chan += connected_sensors.sensor_array[i]->useADC;
     sensor_sample_func_array[i] = get_sensor_sample_func(connected_sensors.sensor_array[i]);
   }
+
+  // Initialise HostToDeviceMessage structure
+  HostToDeviceMessage msg = HostToDeviceMessage_init_zero;
 
   while (true)
   {
@@ -94,6 +107,8 @@ int main()
     }
     SEGGER_RTT_printf(0, "\n");
     sleep_ms(10);
+
+    tud_task();
   }
   return 0;
 }

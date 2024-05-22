@@ -1,0 +1,39 @@
+syntax = "proto2";
+
+import 'nanopb.proto';
+
+message SetPeriodicSamplerMessage
+{
+    required int32 sampling_period = 1;
+}
+
+message StopPeriodicSamplerMessage
+{
+    required bool stop_sampling = 1;
+}
+
+message HostToDeviceMessage
+{
+    option (nanopb_msgopt).submsg_callback = true;
+    oneof payload {
+        SetPeriodicSamplerMessage set_periodic_sampler_msg = 1;
+        StopPeriodicSamplerMessage stop_periodic_sampler_msg = 2;
+    }
+}
+
+message AckSetPeriodicSamplerMessage
+{
+    required bool ack = 1;
+}
+message AckStopPeriodicSamplerMessage
+{
+    required bool ack = 1;
+}
+
+message DeviceToHostMessage
+{
+    oneof payload {
+        AckStopPeriodicSamplerMessage ack_stop_periodic_sampler_msg = 1;
+        AckSetPeriodicSamplerMessage ack_set_periodic_sampler_msg = 2;
+    }
+}
