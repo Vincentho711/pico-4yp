@@ -179,7 +179,7 @@ class ExecuteOneOffSamplingCommand(Command):
                     print(f"Invalid operation : The host is in stream mode, please switch it back to message mode first but stopping the periodic sampler. ")
                     logger.error("Command.streaming is True, so execute one off sampling msg cannot be issued.")
                 else:
-                    print(f"Invaid operation : Please connect to a connectivity interface and start periodic sampling before attempting to stop it.")
+                    print(f"Invaid operation : Please connect to a connectivity interface first.")
                     logger.error("Command.async_transport has not been set to any type of Transport.")
 
         except Exception as e:
