@@ -12,12 +12,18 @@ message StopPeriodicSamplerMessage
     required bool stop_sampling = 1;
 }
 
+message ExecuteOneOffSamplerMessage
+{
+    required bool execute_one_off_sampling = 1;
+}
+
 message HostToDeviceMessage
 {
     option (nanopb_msgopt).submsg_callback = true;
     oneof payload {
         SetPeriodicSamplerMessage set_periodic_sampler_msg = 1;
         StopPeriodicSamplerMessage stop_periodic_sampler_msg = 2;
+        ExecuteOneOffSamplerMessage execute_one_off_sampler_msg = 3;
     }
 }
 
@@ -30,10 +36,23 @@ message AckStopPeriodicSamplerMessage
     required bool ack = 1;
 }
 
+message OneOffSamplerDataMessage
+{
+    required int32 sensor_val_0 = 1;
+    required int32 sensor_val_1 = 2;
+    required int32 sensor_val_2 = 3;
+    required int32 sensor_val_3 = 4;
+    required int32 sensor_val_4 = 5;
+    required int32 sensor_val_5 = 6;
+    required int32 sensor_val_6 = 7;
+    required int32 sensor_val_7 = 8;
+}
+
 message DeviceToHostMessage
 {
     oneof payload {
         AckStopPeriodicSamplerMessage ack_stop_periodic_sampler_msg = 1;
         AckSetPeriodicSamplerMessage ack_set_periodic_sampler_msg = 2;
+        OneOffSamplerDataMessage one_off_sampler_data_msg = 3;
     }
 }

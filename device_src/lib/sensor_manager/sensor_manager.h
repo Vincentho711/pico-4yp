@@ -17,6 +17,7 @@ struct Sensor
   char name [64];
   enum sensorFamily family;
   bool useADC;
+  int sampling_time_us; // Used for calculating the upper limit of sampling frequency for digital sensors
 };
 
 // A generic struct which stores information about the number of connected sensors

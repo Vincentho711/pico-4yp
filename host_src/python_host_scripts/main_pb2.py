@@ -15,7 +15,7 @@ _sym_db = _symbol_database.Default()
 import nanopb_pb2 as nanopb__pb2
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\nmain.proto\x1a\x0cnanopb.proto\"4\n\x19SetPeriodicSamplerMessage\x12\x17\n\x0fsampling_period\x18\x01 \x02(\x05\"3\n\x1aStopPeriodicSamplerMessage\x12\x15\n\rstop_sampling\x18\x01 \x02(\x08\"\xaa\x01\n\x13HostToDeviceMessage\x12>\n\x18set_periodic_sampler_msg\x18\x01 \x01(\x0b\x32\x1a.SetPeriodicSamplerMessageH\x00\x12@\n\x19stop_periodic_sampler_msg\x18\x02 \x01(\x0b\x32\x1b.StopPeriodicSamplerMessageH\x00:\x06\x92?\x03\xb0\x01\x01\x42\t\n\x07payload\"+\n\x1c\x41\x63kSetPeriodicSamplerMessage\x12\x0b\n\x03\x61\x63k\x18\x01 \x02(\x08\",\n\x1d\x41\x63kStopPeriodicSamplerMessage\x12\x0b\n\x03\x61\x63k\x18\x01 \x02(\x08\"\xb0\x01\n\x13\x44\x65viceToHostMessage\x12G\n\x1d\x61\x63k_stop_periodic_sampler_msg\x18\x01 \x01(\x0b\x32\x1e.AckStopPeriodicSamplerMessageH\x00\x12\x45\n\x1c\x61\x63k_set_periodic_sampler_msg\x18\x02 \x01(\x0b\x32\x1d.AckSetPeriodicSamplerMessageH\x00\x42\t\n\x07payload')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\nmain.proto\x1a\x0cnanopb.proto\"4\n\x19SetPeriodicSamplerMessage\x12\x17\n\x0fsampling_period\x18\x01 \x02(\x05\"3\n\x1aStopPeriodicSamplerMessage\x12\x15\n\rstop_sampling\x18\x01 \x02(\x08\"?\n\x1b\x45xecuteOneOffSamplerMessage\x12 \n\x18\x65xecute_one_off_sampling\x18\x01 \x02(\x08\"\xef\x01\n\x13HostToDeviceMessage\x12>\n\x18set_periodic_sampler_msg\x18\x01 \x01(\x0b\x32\x1a.SetPeriodicSamplerMessageH\x00\x12@\n\x19stop_periodic_sampler_msg\x18\x02 \x01(\x0b\x32\x1b.StopPeriodicSamplerMessageH\x00\x12\x43\n\x1b\x65xecute_one_off_sampler_msg\x18\x03 \x01(\x0b\x32\x1c.ExecuteOneOffSamplerMessageH\x00:\x06\x92?\x03\xb0\x01\x01\x42\t\n\x07payload\"+\n\x1c\x41\x63kSetPeriodicSamplerMessage\x12\x0b\n\x03\x61\x63k\x18\x01 \x02(\x08\",\n\x1d\x41\x63kStopPeriodicSamplerMessage\x12\x0b\n\x03\x61\x63k\x18\x01 \x02(\x08\"\xca\x01\n\x18OneOffSamplerDataMessage\x12\x14\n\x0csensor_val_0\x18\x01 \x02(\x05\x12\x14\n\x0csensor_val_1\x18\x02 \x02(\x05\x12\x14\n\x0csensor_val_2\x18\x03 \x02(\x05\x12\x14\n\x0csensor_val_3\x18\x04 \x02(\x05\x12\x14\n\x0csensor_val_4\x18\x05 \x02(\x05\x12\x14\n\x0csensor_val_5\x18\x06 \x02(\x05\x12\x14\n\x0csensor_val_6\x18\x07 \x02(\x05\x12\x14\n\x0csensor_val_7\x18\x08 \x02(\x05\"\xef\x01\n\x13\x44\x65viceToHostMessage\x12G\n\x1d\x61\x63k_stop_periodic_sampler_msg\x18\x01 \x01(\x0b\x32\x1e.AckStopPeriodicSamplerMessageH\x00\x12\x45\n\x1c\x61\x63k_set_periodic_sampler_msg\x18\x02 \x01(\x0b\x32\x1d.AckSetPeriodicSamplerMessageH\x00\x12=\n\x18one_off_sampler_data_msg\x18\x03 \x01(\x0b\x32\x19.OneOffSamplerDataMessageH\x00\x42\t\n\x07payload')
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
@@ -28,12 +28,16 @@ if _descriptor._USE_C_DESCRIPTORS == False:
   _globals['_SETPERIODICSAMPLERMESSAGE']._serialized_end=80
   _globals['_STOPPERIODICSAMPLERMESSAGE']._serialized_start=82
   _globals['_STOPPERIODICSAMPLERMESSAGE']._serialized_end=133
-  _globals['_HOSTTODEVICEMESSAGE']._serialized_start=136
-  _globals['_HOSTTODEVICEMESSAGE']._serialized_end=306
-  _globals['_ACKSETPERIODICSAMPLERMESSAGE']._serialized_start=308
-  _globals['_ACKSETPERIODICSAMPLERMESSAGE']._serialized_end=351
-  _globals['_ACKSTOPPERIODICSAMPLERMESSAGE']._serialized_start=353
-  _globals['_ACKSTOPPERIODICSAMPLERMESSAGE']._serialized_end=397
-  _globals['_DEVICETOHOSTMESSAGE']._serialized_start=400
-  _globals['_DEVICETOHOSTMESSAGE']._serialized_end=576
+  _globals['_EXECUTEONEOFFSAMPLERMESSAGE']._serialized_start=135
+  _globals['_EXECUTEONEOFFSAMPLERMESSAGE']._serialized_end=198
+  _globals['_HOSTTODEVICEMESSAGE']._serialized_start=201
+  _globals['_HOSTTODEVICEMESSAGE']._serialized_end=440
+  _globals['_ACKSETPERIODICSAMPLERMESSAGE']._serialized_start=442
+  _globals['_ACKSETPERIODICSAMPLERMESSAGE']._serialized_end=485
+  _globals['_ACKSTOPPERIODICSAMPLERMESSAGE']._serialized_start=487
+  _globals['_ACKSTOPPERIODICSAMPLERMESSAGE']._serialized_end=531
+  _globals['_ONEOFFSAMPLERDATAMESSAGE']._serialized_start=534
+  _globals['_ONEOFFSAMPLERDATAMESSAGE']._serialized_end=736
+  _globals['_DEVICETOHOSTMESSAGE']._serialized_start=739
+  _globals['_DEVICETOHOSTMESSAGE']._serialized_end=978
 # @@protoc_insertion_point(module_scope)

@@ -5,7 +5,7 @@ import asyncio
 import logging
 import serial_asyncio
 from typing import Optional
-from message_handler.message_handler import prepare_set_periodic_sampler_msg, prepare_stop_periodic_sampler_msg
+from message_handler.message_handler import prepare_set_periodic_sampler_msg, prepare_stop_periodic_sampler_msg, prepare_execute_one_off_sampler_msg
 from communications.protocol import IngressProtocol
 
 # Access the logger from the parent script
@@ -158,6 +158,43 @@ class StopPeriodicSamplingCommand(Command):
         logger.debug(f"{usage_parts = }")
         return parser
 
+class ExecuteOneOffSamplingCommand(Command):
+    command_name = "execute_one_off_sampling"
+    command_info = "Execute one off sampling."
+
+    @classmethod
+    def execute(cls, command_args: argparse.Namespace, state: dict) -> None:
+        try:
+            print(f"'{cls.command_name}' executed.")
+            if cls.streaming:
+                print(f"Invalid operation : The host is in stream mode, please switch it back to message mode first but stopping the periodic sampler. ")
+                logger.error("Command.streaming is True, so execute one off sampling msg cannot be issued.")
+            if cls.async_transport is not None and not cls.streaming:
+                msg = prepare_execute_one_off_sampler_msg()
+                logger.debug(f"Writing execute one off sampling msg with transport '{type(cls.async_transport)}'.")
+                logger.debug(f"Raw bytes: {msg}")
+                cls.async_transport.write(msg)
+            else:
+                if cls.streaming:
+                    print(f"Invalid operation : The host is in stream mode, please switch it back to message mode first but stopping the periodic sampler. ")
+                    logger.error("Command.streaming is True, so execute one off sampling msg cannot be issued.")
+                else:
+                    print(f"Invaid operation : Please connect to a connectivity interface and start periodic sampling before attempting to stop it.")
+                    logger.error("Command.async_transport has not been set to any type of Transport.")
+
+        except Exception as e:
+            logger.exception(f"Exception in execute() : {e}")
+
+    @classmethod
+    def get_argument_parser(cls) -> argparse.ArgumentParser:
+        parser = super().get_argument_parser()
+        # Update the usage part of the 'help' message according to the arguments specific to a command
+        usage_parts = [cls.command_name]
+        usage_parts.extend([f"[{arg.dest}]" for arg in parser._actions[1:]])
+        parser.usage = ' '.join(usage_parts)
+        logger.debug(f"{usage_parts = }")
+        return parser
+
 class DisconnectCommand(Command):
     command_name = "disconnect"
     command_info = "Disconnect from the connectivity interface."
@@ -192,6 +229,7 @@ class DisconnectCommand(Command):
 class CommandFactory:
     command_classes = {
         "usb_connect" : UsbConnectCommand,
+        "execute_one_off_sampling" : ExecuteOneOffSamplingCommand,
         "set_periodic_sampling" : SetPeriodicSamplingCommand,
         "stop_periodic_sampling" : StopPeriodicSamplingCommand,
         "disconnect" : DisconnectCommand,

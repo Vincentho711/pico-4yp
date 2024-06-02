@@ -50,3 +50,14 @@ def prepare_stop_periodic_sampler_msg() -> main_pb2.HostToDeviceMessage:
 
     except Exception as e:
         logger.exception("Exception occurred.")
+
+def prepare_execute_one_off_sampler_msg() -> main_pb2.HostToDeviceMessage:
+    try:
+        logger.debug(f"Preparing execute_one_off_sampler_msg.")
+        msg = main_pb2.HostToDeviceMessage()
+        msg.execute_one_off_sampler_msg.execute_one_off_sampling = True
+        msg = prepend_msg_length(msg.SerializeToString())
+        return msg
+
+    except Exception as e:
+        logger.exception("Exception occured.")

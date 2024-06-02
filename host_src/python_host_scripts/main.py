@@ -108,7 +108,7 @@ if __name__ == "__main__":
             logger_formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
             logger_handler.setFormatter(logger_formatter)
             logger.addHandler(logger_handler)
-            logger.setLevel(logging.DEBUG)
+            logger.setLevel(logging.INFO)
 
             # Start runing the async main()
             asyncio.run(main())
